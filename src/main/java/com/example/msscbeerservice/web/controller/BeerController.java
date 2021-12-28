@@ -4,9 +4,11 @@ import com.example.msscbeerservice.web.services.BeerService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.example.msscbeerservice.web.model.BeerDto;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @RequestMapping("/api/v1/beer")
@@ -24,7 +26,7 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity handlePost(@RequestBody BeerDto beerDto){
+    public ResponseEntity handlePost(@Validated @RequestBody BeerDto beerDto){
         BeerDto savedBeer = beerService.saveBeer(beerDto);
 
         HttpHeaders headers = new HttpHeaders();
@@ -34,7 +36,7 @@ public class BeerController {
     }
 
     @PutMapping({"/{beerId}"})
-    public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId,BeerDto beerDto){
+    public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId,@RequestBody @Validated BeerDto beerDto){
         beerService.updateBeer(beerId,beerDto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
