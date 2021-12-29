@@ -8,7 +8,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.example.msscbeerservice.web.model.BeerDto;
 
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @RequestMapping("/api/v1/beer")
